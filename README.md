@@ -62,7 +62,7 @@ The full folder structure of this app is explained below:
 | **dist**                 | Contains the distributable (or output) from your TypeScript build. This is the code you ship  |
 | **node_modules**         | Contains all your npm dependencies                                                            |
 | **src**                  | Contains your source code that will be compiled to the dist dir                               |
-| **src/config**           | Passport authentication strategies and login middleware. Add other complex config code here   |
+| **src/config**           | Add complex config code here                                                                  |
 | **src/controllers**      | Controllers define functions that respond to various http requests                            |
 | **src/models**           | Models define Mongoose schemas that will be used in storing and retrieving data from MongoDB  |
 | **src/public**           | Static assets that will be used client side                                                   |
@@ -197,7 +197,7 @@ First the compiler will look for a `d.ts` file in `node_modules/@types` and then
 #### Using `dts-gen`
 Unless you are familiar with `.d.ts` files, I strongly recommend trying to use the tool [dts-gen](https://github.com/Microsoft/dts-gen) first.
 The [README](https://github.com/Microsoft/dts-gen#dts-gen-a-typescript-definition-file-generator) does a great job explaining how to use the tool, and for most cases, you'll get an excellent scaffold of a `.d.ts` file to start with.
-In this project, `bcrypt-nodejs.d.ts`, `fbgraph.d.ts`, and `lusca.d.ts` were all generated using `dts-gen`. 
+In this project, `bcrypt-nodejs.d.ts` and `lusca.d.ts` were all generated using `dts-gen`. 
 
 #### Writing a `.d.ts` file
 If generating a `.d.ts` using `dts-gen` isn't working, [you should tell me about it first](https://www.surveymonkey.com/r/LN2CV82), but then you can create your own `.d.ts` file.
@@ -378,17 +378,12 @@ In that file you'll find two sections:
 | dotenv                          | Loads environment variables from .env file.                           |
 | errorhandler                    | Express 4 middleware.                                                 |
 | express                         | Node.js web framework.                                                |
-| express-flash                   | Provides flash messages for Express.                                  |
 | express-session                 | Express 4 middleware.                                                 |
 | express-validator               | Easy form validation for Express.                                     |
-| fbgraph                         | Facebook Graph API library.                                           |
 | lusca                           | CSRF middleware.                                                      |
 | mongoose                        | MongoDB ODM.                                                          |
 | morgan                          | Express 4 middleware.                                                 |
 | nodemailer                      | Node.js library for sending emails.                                   |
-| passport                        | Simple and elegant authentication library for node.js                 |
-| passport-facebook               | Sign-in with Facebook plugin.                                         |
-| passport-local                  | Sign-in with Username and Password plugin.                            |
 | pug (jade)				      | Template engine for Express.                                          |
 | request                         | Simplified HTTP request library.                                      |
 
