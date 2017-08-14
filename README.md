@@ -69,7 +69,6 @@ The full folder structure of this app is explained below:
 | **src/types**            | Holds .d.ts files not found on DefinitelyTyped. Covered more in this [section](#type-definition-dts-files)          |
 | **src**/server.ts        | Entry point to your express app                                                               |
 | **test**                 | Contains your tests. Separate from source because there is a different build process.         |
-| **views**                | Views define how your app renders on the client. In this case we're using pug                 |
 | .env.example             | API keys, tokens, passwords, database URI. Clone this, but don't check it in to public repos. |
 | .travis.yml              | Used to configure Travis CI build                                                             |
 | package.json             | File that contains npm dependencies as well as [build scripts](#what-if-a-library-isnt-on-definitelytyped)                          |
@@ -384,7 +383,6 @@ In that file you'll find two sections:
 | mongoose                        | MongoDB ODM.                                                          |
 | morgan                          | Express 4 middleware.                                                 |
 | nodemailer                      | Node.js library for sending emails.                                   |
-| pug (jade)				      | Template engine for Express.                                          |
 | request                         | Simplified HTTP request library.                                      |
 
 ## `devDependencies`
