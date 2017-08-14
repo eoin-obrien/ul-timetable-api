@@ -7,7 +7,6 @@ import * as session from 'express-session';
 import * as bodyParser from 'body-parser';
 import * as logger from 'morgan';
 import * as errorHandler from 'errorhandler';
-import * as lusca from 'lusca';
 import * as dotenv from 'dotenv';
 import * as mongo from 'connect-mongo';
 import * as mongoose from 'mongoose';
@@ -61,8 +60,6 @@ app.use(session({
     autoReconnect: true,
   }),
 }));
-app.use(lusca.xframe('SAMEORIGIN'));
-app.use(lusca.xssProtection(true));
 
 /**
  * API routes.

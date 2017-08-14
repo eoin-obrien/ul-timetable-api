@@ -47,7 +47,6 @@
     "express": "^4.14.0",
     "express-session": "^1.14.2",
     "lodash": "^4.17.4",
-    "lusca": "^1.4.1",
     "mongoose": "^4.6.6",
     "morgan": "^1.7.0",
     "request": "^2.78.0"
