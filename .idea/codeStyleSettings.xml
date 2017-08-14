@@ -6,6 +6,9 @@
         <TypeScriptCodeStyleSettings>
           <option name="FORCE_SEMICOLON_STYLE" value="true" />
         </TypeScriptCodeStyleSettings>
+        <codeStyleSettings language="TypeScript">
+          <option name="RIGHT_MARGIN" value="120" />
+        </codeStyleSettings>
       </value>
     </option>
     <option name="USE_PER_PROJECT_SETTINGS" value="true" />

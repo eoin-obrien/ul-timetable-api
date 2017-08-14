@@ -94,6 +94,7 @@
     "supertest": "^2.0.1",
     "ts-jest": "^19.0.8",
     "tslint": "^5.0.0",
+    "tslint-config-airbnb": "^5.2.1",
     "typescript": "^2.4.0"
   }
 }
