@@ -11,7 +11,6 @@ import * as lusca from 'lusca';
 import * as dotenv from 'dotenv';
 import * as mongo from 'connect-mongo';
 import * as mongoose from 'mongoose';
-const expressValidator = require('express-validator');
 
 
 const mongoStoreFactory = mongo(session);
@@ -53,7 +52,6 @@ app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(expressValidator());
 app.use(session({
   resave: true,
   saveUninitialized: true,
