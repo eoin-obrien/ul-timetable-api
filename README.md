@@ -144,14 +144,12 @@ Below is a list of all the scripts this template has available:
 | Npm Script | Description |
 | ------------------------- | ------------------------------------------------------------------------------------------------- |
 | `start`                   | Runs full build before starting all watch tasks. Can be invoked with `npm start`                  |
-| `build`                   | Full build. Runs ALL build tasks (`build-sass`, `build-ts`, `tslint`)       |
+| `build`                   | Full build. Runs ALL build tasks (`build-ts`, `tslint`)                                           |
 | `serve`                   | Runs node on `dist/server.js` which is the apps entry point                                       |
-| `watch`                   | Runs all watch tasks (TypeScript, Sass, Node). Use this if you're not touching static assets.     |
+| `watch`                   | Runs all watch tasks (TypeScript, Node). Use this if you're not touching static assets.           |
 | `test`                    | Runs tests using Jest test runner                                                                 |
 | `build-ts`                | Compiles all source `.ts` files to `.js` files in the `dist` folder                               |
-| `watch-ts`                | Same as `build-ts` but continuously watches `.ts` files and re-compiles when needed                |
-| `build-sass`              | Compiles all `.scss` files to `.css` files                                                        |
-| `watch-sass`              | Same as `build-sass` but continuously watches `.scss` files and re-compiles when needed             |
+| `watch-ts`                | Same as `build-ts` but continuously watches `.ts` files and re-compiles when needed               |
 | `tslint`                  | Runs TSLint on project files                                                                      |
 
 ## Type Definition (`.d.ts`) Files
@@ -400,7 +398,6 @@ In that file you'll find two sections:
 | ------------------------------- | --------------------------------------------------------------------- |
 | concurrently                    | Utility that manages multiple concurrent tasks. Used with npm scripts |
 | jest                            | Testing library for JavaScript.                                       |
-| node-sass                       | Allows to compile .scss files to .css                                 |
 | supertest                       | HTTP assertion library.                                               |
 | ts-test                         | A preprocessor with sourcemap support to help use TypeScript wit Jest.|
 | tslint                          | Linter (similar to ESLint) for TypeScript files                       |
