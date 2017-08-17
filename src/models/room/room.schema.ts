@@ -3,8 +3,9 @@ const Room: string = `
   type Room {
     _id: ID!
     building: String!
+    buildingCode: String!
     floor: String!
-    roomNumber: String!
+    number: String!
   }
 `;
 
