@@ -8,6 +8,7 @@ import timetableSchema from '../models/timetable/timetable.schema';
 import weekSchema from '../models/week/week.schema';
 
 import { resolvers as moduleResolvers } from '../models/module/module.resolver';
+import { resolvers as weekResolvers } from '../models/week/week.resolver';
 
 // language=GraphQL Schema
 const rootQuery = `
@@ -15,6 +16,7 @@ const rootQuery = `
     timetable(_id: ID!): Timetable
     module(_id: ID!): Module
     room(_id: ID!): Room
+    week(_id: ID!): Week
     weeks: [Week]
   }
 `;
@@ -32,7 +34,7 @@ const resolveFunctions = {
   Date: GraphQLDate,
 };
 
-_.merge(resolveFunctions, moduleResolvers);
+_.merge(resolveFunctions, moduleResolvers, weekResolvers);
 
 // Generate the schema object from your types definition.
 export default makeExecutableSchema({
