@@ -1,3 +1,5 @@
+import { LessonType } from '../timetable/timetable.model';
+
 interface RoomType {
   _id: string;
   building: string;
@@ -62,6 +64,11 @@ export const resolvers = {
   RootQuery: {
     room(obj: Object, args: IRoomArgs) {
       return getRoom(args._id);
+    },
+  },
+  Lesson: {
+    room(lesson: LessonType) {
+      return getRoom(lesson.room);
     },
   },
 };

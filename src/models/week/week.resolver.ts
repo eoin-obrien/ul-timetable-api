@@ -1,5 +1,6 @@
 import { WeekType } from './week.model';
 import { scrapeWeeks } from './week.scraper';
+import { LessonType } from '../timetable/timetable.model';
 
 interface IWeekArgs {
   _id: string;
@@ -19,7 +20,12 @@ export const resolvers = {
     week(obj: Object, args: IWeekArgs) {
       return getWeek(args._id);
     },
-    weeks(obj: Object, args: IWeekArgs) {
+    weeks() {
+      return getWeeks();
+    },
+  },
+  Lesson: {
+    weeks(lesson: LessonType) {
       return getWeeks();
     },
   },

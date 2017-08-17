@@ -4,6 +4,7 @@ const Timetable: string = `
     startTime: String!
     endTime: String!
     module: Module!
+    group: String
     type: String!
     room: Room!
     weeks: [Week!]!

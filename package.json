@@ -57,6 +57,7 @@
     "lodash": "^4.17.4",
     "mongoose": "^4.6.6",
     "morgan": "^1.7.0",
+    "parse-numeric-range": "0.0.2",
     "request": "^2.78.0",
     "request-promise": "^4.2.1",
     "request-promise-native": "^1.0.4",
