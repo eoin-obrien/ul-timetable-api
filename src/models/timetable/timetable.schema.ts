@@ -6,7 +6,7 @@ const Timetable: string = `
     module: Module!
     group: String
     type: String!
-    room: Room!
+    rooms: [Room!]!
     weeks: [Week!]!
   }
 

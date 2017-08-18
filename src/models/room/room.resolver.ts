@@ -1,6 +1,7 @@
 import { LessonType } from '../timetable/timetable.model';
+import {DataLoaders} from "../../schema/dataloaders";
 
-interface RoomType {
+export interface RoomType {
   _id: string;
   building: string;
   buildingCode: string;
@@ -45,7 +46,7 @@ function findBuildingCode(roomId: string) {
   }, '');
 }
 
-function getRoom(_id: string): RoomType {
+export function getRoom(_id: string): RoomType {
   const buildingCode = findBuildingCode(_id);
   const room: RoomType = {
     _id,
@@ -62,13 +63,13 @@ function getRoom(_id: string): RoomType {
 
 export const resolvers = {
   RootQuery: {
-    room(obj: Object, args: IRoomArgs) {
-      return getRoom(args._id);
+    room(obj: Object, args: IRoomArgs, { dataloaders }: { dataloaders: DataLoaders }) {
+      return dataloaders.roomLoader.load(args._id);
     },
   },
   Lesson: {
-    room(lesson: LessonType) {
-      return getRoom(lesson.room);
+    rooms(lesson: LessonType, args: Object, { dataloaders }: { dataloaders: DataLoaders }) {
+      return dataloaders.roomLoader.loadMany(lesson.rooms);
     },
   },
 };

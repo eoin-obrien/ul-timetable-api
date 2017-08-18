@@ -19,7 +19,7 @@ export function parseLesson(element: string): LessonType {
     module: parts[2],
     type: parts[3],
     group: parts[4] || null,
-    room: parts[5],
+    rooms: parts[5].split(/\s+/),
     weeks: rangeParser.parse(parts[6].substring(4)),
   };
 }

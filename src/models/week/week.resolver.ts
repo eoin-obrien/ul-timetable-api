@@ -6,26 +6,26 @@ interface IWeekArgs {
   _id: string;
 }
 
-function getWeeks(): Promise<WeekType[]> {
+export function getWeeks(): Promise<WeekType[]> {
   return scrapeWeeks();
 }
 
-function getWeek(_id: string): Promise<WeekType> {
-  return scrapeWeeks()
+export function getWeek(_id: string): Promise<WeekType> {
+  return getWeeks()
     .then(weeks => weeks.find(week => week._id === _id));
 }
 
 export const resolvers = {
   RootQuery: {
-    week(obj: Object, args: IWeekArgs) {
+    week(obj: Object, args: IWeekArgs, { dataloaders }: { dataloaders: DataLoaders }) {
       return getWeek(args._id);
     },
-    weeks() {
+    weeks(obj: Object, args: Object, { dataloaders }: { dataloaders: DataLoaders }) {
       return getWeeks();
     },
   },
   Lesson: {
-    weeks(lesson: LessonType) {
+    weeks(lesson: LessonType, args: Object, { dataloaders }: { dataloaders: DataLoaders }) {
       return getWeeks();
     },
   },

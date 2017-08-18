@@ -1,24 +1,25 @@
 import { ModuleType } from './module.model';
 import { scrapeModule } from './module.scraper';
 import { LessonType } from '../timetable/timetable.model';
+import { DataLoaders } from '../../schema/dataloaders';
 
 interface IModuleArgs {
   _id: string;
 }
 
-function getModule(_id: string): Promise<ModuleType> {
+export function getModule(_id: string): Promise<ModuleType> {
   return scrapeModule(_id);
 }
 
 export const resolvers = {
   RootQuery: {
-    module(obj: Object, args: IModuleArgs) {
-      return getModule(args._id);
+    module(obj: Object, args: IModuleArgs, { dataloaders }: { dataloaders: DataLoaders }) {
+      return dataloaders.moduleLoader.load(args._id);
     },
   },
   Lesson: {
-    module(lesson: LessonType) {
-      return getModule(lesson.module);
+    module(lesson: LessonType, args: Object, { dataloaders }: { dataloaders: DataLoaders }) {
+      return dataloaders.moduleLoader.load(lesson.module);
     },
   },
 };

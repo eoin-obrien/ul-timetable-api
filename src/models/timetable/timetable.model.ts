@@ -6,7 +6,7 @@ export type LessonType = {
   module: string;
   group?: string;
   type: string;
-  room: string;
+  rooms: string[];
   weeks: string[]
 };
 
@@ -24,9 +24,9 @@ const LessonSchema = new Schema({
   startTime: { type: String, required: true },
   endTime: { type: String, required: true },
   module: { type: String, ref: 'Module', required: true },
-  group: { type: String },
+  group: String,
   type: { type: String, required: true },
-  room: { type: String, required: true },
+  rooms: [String],
   weeks: [{ type: String, ref: 'Week' }],
 }, { _id: false });
 

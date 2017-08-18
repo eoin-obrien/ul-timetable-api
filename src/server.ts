@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import * as mongoose from 'mongoose';
 import * as graphqlHTTP from 'express-graphql';
 import schema from './schema/schema';
+import {buildDataLoaders} from "./schema/dataloaders";
 
 // Load environment variables from .env file, where API keys and passwords are configured
 dotenv.config({ path: '.env.example' });
@@ -28,6 +29,9 @@ app.set('port', process.env.PORT || 3000);
 // GraphQL
 app.use('/graphql', graphqlHTTP({
   schema,
+  context: {
+    dataloaders: buildDataLoaders(),
+  },
   graphiql: true,
   pretty: true,
 }));
