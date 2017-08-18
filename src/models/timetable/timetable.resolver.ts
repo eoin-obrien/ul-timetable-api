@@ -1,12 +1,12 @@
-import { TimetableType } from './timetable.model';
 import { scrapeTimetable } from './timetable.scraper';
 import { DataLoaders } from '../../schema/dataloaders';
+import { ITimetable } from '../../types/models/ITimetable';
 
 interface ITimetableArgs {
   _id: string;
 }
 
-export function getTimetable(_id: string): Promise<TimetableType> {
+export function getTimetable(_id: string): Promise<ITimetable> {
   return scrapeTimetable(_id);
 }
 

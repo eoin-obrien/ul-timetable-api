@@ -1,16 +1,16 @@
-import { WeekType } from './week.model';
 import { scrapeWeeks } from './week.scraper';
-import { LessonType } from '../timetable/timetable.model';
+import { IWeek } from '../../types/models/IWeek';
+import { DataLoaders } from '../../schema/dataloaders';
 
 interface IWeekArgs {
   _id: string;
 }
 
-export function getWeeks(): Promise<WeekType[]> {
+export function getWeeks(): Promise<IWeek[]> {
   return scrapeWeeks();
 }
 
-export function getWeek(_id: string): Promise<WeekType> {
+export function getWeek(_id: string): Promise<IWeek> {
   return getWeeks()
     .then(weeks => weeks.find(week => week._id === _id));
 }
@@ -25,7 +25,7 @@ export const resolvers = {
     },
   },
   Lesson: {
-    weeks(lesson: LessonType, args: Object, { dataloaders }: { dataloaders: DataLoaders }) {
+    weeks(lesson: ILesson, args: Object, { dataloaders }: { dataloaders: DataLoaders }) {
       return getWeeks();
     },
   },

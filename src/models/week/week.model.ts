@@ -1,9 +1,5 @@
-import { Document, Model, Schema, model } from 'mongoose';
-
-export type WeekType = Document & {
-  _id: string,
-  name: string,
-};
+import { Model, Schema, model } from 'mongoose';
+import { IWeek } from '../../types/models/IWeek';
 
 const WeekSchema = new Schema({
   _id: { type: String, required: true },
@@ -14,4 +10,4 @@ const WeekSchema = new Schema({
 WeekSchema.set('timestamps', true);
 
 
-export const Week: Model<WeekType> = model<WeekType>('Week', WeekSchema);
+export const Week: Model<IWeek> = model<IWeek>('Week', WeekSchema);

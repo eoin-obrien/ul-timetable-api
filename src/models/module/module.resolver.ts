@@ -1,13 +1,12 @@
-import { ModuleType } from './module.model';
 import { scrapeModule } from './module.scraper';
-import { LessonType } from '../timetable/timetable.model';
 import { DataLoaders } from '../../schema/dataloaders';
+import { IModule } from '../../types/models/IModule';
 
 interface IModuleArgs {
   _id: string;
 }
 
-export function getModule(_id: string): Promise<ModuleType> {
+export function getModule(_id: string): Promise<IModule> {
   return scrapeModule(_id);
 }
 
@@ -18,7 +17,7 @@ export const resolvers = {
     },
   },
   Lesson: {
-    module(lesson: LessonType, args: Object, { dataloaders }: { dataloaders: DataLoaders }) {
+    module(lesson: ILesson, args: Object, { dataloaders }: { dataloaders: DataLoaders }) {
       return dataloaders.moduleLoader.load(lesson.module);
     },
   },

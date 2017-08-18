@@ -1,13 +1,5 @@
-import { LessonType } from '../timetable/timetable.model';
-import {DataLoaders} from "../../schema/dataloaders";
-
-export interface RoomType {
-  _id: string;
-  building: string;
-  buildingCode: string;
-  floor: string;
-  number: string;
-}
+import { DataLoaders } from '../../schema/dataloaders';
+import { IRoom } from '../../types/models/IRoom';
 
 interface IRoomArgs {
   _id: string;
@@ -46,9 +38,9 @@ function findBuildingCode(roomId: string) {
   }, '');
 }
 
-export function getRoom(_id: string): RoomType {
+export function getRoom(_id: string): IRoom {
   const buildingCode = findBuildingCode(_id);
-  const room: RoomType = {
+  const room: IRoom = {
     _id,
     buildingCode,
     building: buildings[buildingCode],
@@ -68,7 +60,7 @@ export const resolvers = {
     },
   },
   Lesson: {
-    rooms(lesson: LessonType, args: Object, { dataloaders }: { dataloaders: DataLoaders }) {
+    rooms(lesson: ILesson, args: Object, { dataloaders }: { dataloaders: DataLoaders }) {
       return dataloaders.roomLoader.loadMany(lesson.rooms);
     },
   },

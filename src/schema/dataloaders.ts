@@ -1,11 +1,12 @@
 import * as DataLoader from 'dataloader';
-import { ModuleType } from '../models/module/module.model';
-import { TimetableType } from '../models/timetable/timetable.model';
-import { WeekType } from '../models/week/week.model';
-import { getRoom, RoomType } from '../models/room/room.resolver';
+import { getRoom } from '../models/room/room.resolver';
 import { getModule } from '../models/module/module.resolver';
 import { getTimetable } from '../models/timetable/timetable.resolver';
 import { getWeeks } from '../models/week/week.resolver';
+import { ModuleType } from 'IModule.ts';
+import { RoomType } from 'IRoom.ts';
+import { TimetableType } from 'ITimetable.ts';
+import { WeekType } from 'IWeek.ts';
 
 async function batchModules(keys: string[]): Promise<ModuleType[]> {
   return Promise.all(keys.map(getModule));
