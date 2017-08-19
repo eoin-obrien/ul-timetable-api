@@ -2,6 +2,7 @@ import { IDataLoaders } from '../../dataloaders';
 import { IRoom } from '../../types/models/IRoom';
 import { ILesson } from '../../types/models/ILesson';
 import { IRoomQueryArgs } from '../../types/query-args/IRoomQueryArgs';
+import { GraphQLError } from 'graphql';
 
 const buildings: { [key: string]: string } = {
   S: 'Schuman Building',
@@ -27,6 +28,12 @@ const buildings: { [key: string]: string } = {
 const floorPattern = /^B|G|M|O|0|1|2|3$/;
 const roomPattern = /^[0-9]+[A-Z]?$/;
 
+function assertValidRoom(room: IRoom) {
+  if (!room.buildingCode || !floorPattern.test(room.floor) || !roomPattern.test(room.number)) {
+    throw new GraphQLError(`Room ID "${room._id}" is invalid.`);
+  }
+}
+
 function findBuildingCode(roomId: string) {
   return Object.keys(buildings).reduce((longest, current) => {
     if (roomId.startsWith(current) && current.length > longest.length) {
@@ -45,9 +52,7 @@ export function getRoom(_id: string): IRoom {
     floor: _id.substring(buildingCode.length, buildingCode.length + 1),
     number: _id.substring(buildingCode.length + 1),
   };
-  if (!room.buildingCode || !floorPattern.test(room.floor) || !roomPattern.test(room.number)) {
-    return null;
-  }
+  assertValidRoom(room);
   return room;
 }
 

@@ -11,6 +11,9 @@ const titleSelector
 export function parse($: CheerioStatic): IModule {
   const _id = $(codeSelector).text().trim();
   const name = titleCapitalization($(titleSelector).text().trim().toLowerCase());
+  if (!_id || !name) {
+    return null;
+  }
   return new Module({
     _id,
     name,
