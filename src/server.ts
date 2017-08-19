@@ -11,7 +11,7 @@ dotenv.config({ path: '.env.example' });
 
 
 // Connect to MongoDB
-
+(<any>mongoose).Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
 
 mongoose.connection.on('error', () => {
@@ -27,14 +27,15 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 
 // GraphQL
-app.use('/graphql', graphqlHTTP({
-  schema,
-  context: {
-    dataloaders: buildDataLoaders(),
-  },
-  graphiql: true,
-  pretty: true,
-}));
+app.use('/graphql',  (req, res) => {
+  const dataloaders = buildDataLoaders();
+  graphqlHTTP({
+    schema,
+    context:{ dataloaders },
+    graphiql: true,
+    pretty: true,
+  })(req, res);
+});
 
 // Start Express server
 app.listen(app.get('port'), () => {

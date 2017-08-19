@@ -1,6 +1,8 @@
 import { Model, Schema, model } from 'mongoose';
 import { ITimetable } from '../../types/models/ITimetable';
 
+const bestBefore = 86400000;
+
 const LessonSchema = new Schema({
   startTime: { type: String, required: true },
   endTime: { type: String, required: true },
@@ -23,5 +25,9 @@ const TimetableSchema = new Schema({
 
 TimetableSchema.set('timestamps', true);
 
+TimetableSchema.methods.isStale = function () {
+  const age = new Date().getTime() - this.updatedAt.getTime();
+  return age > bestBefore;
+};
 
 export const Timetable: Model<ITimetable> = model<ITimetable>('Timetable', TimetableSchema);
