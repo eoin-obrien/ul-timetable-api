@@ -24,14 +24,14 @@ async function batchWeeks(): Promise<IWeek[]> {
   return getWeeks();
 }
 
-export interface DataLoaders {
+export interface IDataLoaders {
   moduleLoader: DataLoader<string, IModule>;
   roomLoader: DataLoader<string, IRoom>;
   timetableLoader: DataLoader<string, ITimetable>;
   weekLoader: DataLoader<string, IWeek>;
 }
 
-export function buildDataLoaders(): DataLoaders {
+export function buildDataLoaders(): IDataLoaders {
   return {
     moduleLoader: new DataLoader(keys => batchModules(keys)),
     roomLoader: new DataLoader(keys => batchRooms(keys)),

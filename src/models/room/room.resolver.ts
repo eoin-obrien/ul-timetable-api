@@ -1,4 +1,4 @@
-import { DataLoaders } from '../../dataloaders';
+import { IDataLoaders } from '../../dataloaders';
 import { IRoom } from '../../types/models/IRoom';
 import { ILesson } from '../../types/models/ILesson';
 import { IRoomQueryArgs } from '../../types/query-args/IRoomQueryArgs';
@@ -53,12 +53,12 @@ export function getRoom(_id: string): IRoom {
 
 export const resolvers = {
   RootQuery: {
-    room(obj: Object, args: IRoomQueryArgs, { dataloaders }: { dataloaders: DataLoaders }) {
+    room(obj: Object, args: IRoomQueryArgs, { dataloaders }: { dataloaders: IDataLoaders }) {
       return dataloaders.roomLoader.load(args._id);
     },
   },
   Lesson: {
-    rooms(lesson: ILesson, args: Object, { dataloaders }: { dataloaders: DataLoaders }) {
+    rooms(lesson: ILesson, args: Object, { dataloaders }: { dataloaders: IDataLoaders }) {
       return dataloaders.roomLoader.loadMany(lesson.rooms);
     },
   },
