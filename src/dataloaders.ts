@@ -3,32 +3,32 @@ import { getRoom } from './models/room/room.resolver';
 import { getModule } from './models/module/module.resolver';
 import { getTimetable } from './models/timetable/timetable.resolver';
 import { getWeeks } from './models/week/week.resolver';
-import { ModuleType } from 'IModule.ts';
-import { RoomType } from 'IRoom.ts';
-import { TimetableType } from 'ITimetable.ts';
-import { WeekType } from 'IWeek.ts';
+import { ITimetable } from './types/models/ITimetable';
+import { IWeek } from './types/models/IWeek';
+import { IModule } from './types/models/IModule';
+import { IRoom } from './types/models/IRoom';
 
-async function batchModules(keys: string[]): Promise<ModuleType[]> {
+async function batchModules(keys: string[]): Promise<IModule[]> {
   return Promise.all(keys.map(getModule));
 }
 
-async function batchRooms(keys: string[]): Promise<RoomType[]> {
+async function batchRooms(keys: string[]): Promise<IRoom[]> {
   return Promise.all(keys.map(getRoom));
 }
 
-async function batchTimetables(keys: string[]): Promise<TimetableType[]> {
+async function batchTimetables(keys: string[]): Promise<ITimetable[]> {
   return Promise.all(keys.map(getTimetable));
 }
 
-async function batchWeeks(): Promise<WeekType[]> {
+async function batchWeeks(): Promise<IWeek[]> {
   return getWeeks();
 }
 
 export interface DataLoaders {
-  moduleLoader: DataLoader<string, ModuleType>;
-  roomLoader: DataLoader<string, RoomType>;
-  timetableLoader: DataLoader<string, TimetableType>;
-  weekLoader: DataLoader<string, WeekType>;
+  moduleLoader: DataLoader<string, IModule>;
+  roomLoader: DataLoader<string, IRoom>;
+  timetableLoader: DataLoader<string, ITimetable>;
+  weekLoader: DataLoader<string, IWeek>;
 }
 
 export function buildDataLoaders(): DataLoaders {
