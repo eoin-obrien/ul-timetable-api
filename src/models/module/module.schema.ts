@@ -1,10 +1,16 @@
+import { GraphQLError } from 'graphql';
+
+export function assertValidModuleId(id: string) {
+  if (!/^[A-Z]{2}\d{4}$/.test(id)) {
+    throw new GraphQLError(`Module ID "${id}" is invalid.`);
+  }
+}
+
 // language=GraphQL Schema
-const Module: string = `
+export const moduleSchema: string = `
   #
   type Module {
     _id: ID!
     name: String!
   }
 `;
-
-export default Module;

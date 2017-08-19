@@ -10,7 +10,7 @@ const LessonSchema = new Schema({
   group: String,
   type: { type: String, required: true },
   rooms: [String],
-  weeks: [{ type: String, ref: 'Week' }],
+  weeks: [{ type: String, ref: 'weekSchema' }],
 }, { _id: false });
 
 const TimetableSchema = new Schema({

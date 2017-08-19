@@ -1,4 +1,4 @@
-import scraper from '../../scraper';
+import { scrape } from '../../scraper';
 import { Week } from './week.model';
 import { IWeek } from '../../types/models/IWeek';
 
@@ -21,5 +21,5 @@ export function parse($: CheerioStatic): IWeek[] {
 
 export function scrapeWeeks(): Promise<IWeek[]> {
   const uri = 'http://www.timetable.ul.ie/weeks.htm';
-  return scraper('get', uri, null).then(parse);
+  return scrape('get', uri, null).then(parse);
 }

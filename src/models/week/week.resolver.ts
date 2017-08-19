@@ -3,14 +3,8 @@ import { IWeek } from '../../types/models/IWeek';
 import { IDataLoaders } from '../../dataloaders';
 import { ILesson } from '../../types/models/ILesson';
 import { IWeekQueryArgs } from '../../types/query-args/IWeekQueryArgs';
-import { GraphQLError } from 'graphql';
 import { Week } from './week.model';
-
-function assertValidWeekId(id: string) {
-  if (!/^([1-9]|1[0-4]?)$/.test(id)) {
-    throw new GraphQLError(`Week ID "${id}" is invalid.`);
-  }
-}
+import { assertValidWeekId } from './week.schema';
 
 export async function getWeeks(): Promise<IWeek[]> {
   const cachedWeeks = await Week.find();
@@ -42,7 +36,7 @@ export const resolvers = {
   },
   Lesson: {
     weeks(lesson: ILesson, args: Object, { dataloaders }: { dataloaders: IDataLoaders }) {
-      return getWeeks();
+      return lesson.weeks.map(getWeek);
     },
   },
 };

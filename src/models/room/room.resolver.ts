@@ -2,7 +2,7 @@ import { IDataLoaders } from '../../dataloaders';
 import { IRoom } from '../../types/models/IRoom';
 import { ILesson } from '../../types/models/ILesson';
 import { IRoomQueryArgs } from '../../types/query-args/IRoomQueryArgs';
-import { GraphQLError } from 'graphql';
+import { assertValidRoomId, roomCodePattern } from './room.schema';
 
 const buildings: { [key: string]: string } = {
   S: 'Schuman Building',
@@ -25,35 +25,17 @@ const buildings: { [key: string]: string } = {
   IW: 'Irish World Academy Building',
   GEMS: 'Medical School',
 };
-const floorPattern = /^B|G|M|O|0|1|2|3$/;
-const roomPattern = /^[0-9]+[A-Z]?$/;
-
-function assertValidRoom(room: IRoom) {
-  if (!room.buildingCode || !floorPattern.test(room.floor) || !roomPattern.test(room.number)) {
-    throw new GraphQLError(`Room ID "${room._id}" is invalid.`);
-  }
-}
-
-function findBuildingCode(roomId: string) {
-  return Object.keys(buildings).reduce((longest, current) => {
-    if (roomId.startsWith(current) && current.length > longest.length) {
-      return current;
-    }
-    return longest;
-  }, '');
-}
 
 export function getRoom(_id: string): IRoom {
-  const buildingCode = findBuildingCode(_id);
-  const room: IRoom = {
+  assertValidRoomId(_id);
+  const codeParts: string[] = _id.match(roomCodePattern);
+  return {
     _id,
-    buildingCode,
-    building: buildings[buildingCode],
-    floor: _id.substring(buildingCode.length, buildingCode.length + 1),
-    number: _id.substring(buildingCode.length + 1),
+    buildingCode: codeParts[1],
+    building: buildings[codeParts[1]],
+    floor: codeParts[2],
+    number: codeParts[3],
   };
-  assertValidRoom(room);
-  return room;
 }
 
 export const resolvers = {
