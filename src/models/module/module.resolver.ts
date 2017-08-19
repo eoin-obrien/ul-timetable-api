@@ -3,14 +3,8 @@ import { IDataLoaders } from '../../dataloaders';
 import { IModule } from '../../types/models/IModule';
 import { ILesson } from '../../types/models/ILesson';
 import { IModuleQueryArgs } from '../../types/query-args/IModuleQueryArgs';
-import { GraphQLError } from 'graphql';
 import { Module } from './module.model';
-
-function assertValidModuleId(id: string) {
-  if (!/^[A-Z]{2}\d{4}$/.test(id)) {
-    throw new GraphQLError(`Module ID "${id}" is invalid.`);
-  }
-}
+import { assertValidModuleId } from './module.schema';
 
 export async function getModule(_id: string): Promise<IModule> {
   assertValidModuleId(_id);

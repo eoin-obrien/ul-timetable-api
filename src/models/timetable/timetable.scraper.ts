@@ -1,5 +1,5 @@
 import * as rangeParser from 'parse-numeric-range';
-import scraper from '../../scraper';
+import { scrape } from '../../scraper';
 import { Timetable } from './timetable.model';
 import { ITimetable } from '../../types/models/ITimetable';
 import { ILesson } from '../../types/models/ILesson';
@@ -51,5 +51,5 @@ export function scrapeTimetable(studentId: string): Promise<ITimetable> {
   const form = {
     T1: studentId,
   };
-  return scraper('post', uri, form).then($ => parse(studentId, $));
+  return scrape('post', uri, form).then($ => parse(studentId, $));
 }

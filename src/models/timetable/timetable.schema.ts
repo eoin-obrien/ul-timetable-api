@@ -1,11 +1,25 @@
+import { GraphQLError } from 'graphql';
+
+export function assertValidStudentId(id: string) {
+  if (!/^[0-9]{7,8}$/.test(id)) {
+    throw new GraphQLError(`Student ID "${id}" is invalid.`);
+  }
+}
+
 // language=GraphQL Schema
-const Timetable: string = `
+export const timetableSchema: string = `
+  enum Type {
+    LEC
+    TUT
+    LAB
+  }
+  
   type Lesson {
     startTime: String!
     endTime: String!
     module: Module!
     group: String
-    type: String!
+    type: Type!
     rooms: [Room!]!
     weeks: [Week!]!
   }
@@ -20,5 +34,3 @@ const Timetable: string = `
     saturday: [Lesson!]!
   }
 `;
-
-export default Timetable;

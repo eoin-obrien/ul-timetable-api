@@ -1,5 +1,5 @@
 import titleCapitalization = require('title-capitalization');
-import scraper from '../../scraper';
+import { scrape } from '../../scraper';
 import { Module } from './module.model';
 import { IModule } from '../../types/models/IModule';
 
@@ -25,5 +25,5 @@ export function scrapeModule(moduleCode: string): Promise<IModule> {
   const form = {
     T1: moduleCode,
   };
-  return scraper('post', uri, form).then(parse);
+  return scrape('post', uri, form).then(parse);
 }
