@@ -2,10 +2,7 @@ import { scrapeWeeks } from './week.scraper';
 import { IWeek } from '../../types/models/IWeek';
 import { DataLoaders } from '../../dataloaders';
 import { ILesson } from '../../types/models/ILesson';
-
-interface IWeekArgs {
-  _id: string;
-}
+import { IWeekQueryArgs } from '../../types/query-args/IWeekQueryArgs';
 
 export function getWeeks(): Promise<IWeek[]> {
   return scrapeWeeks();
@@ -18,7 +15,7 @@ export function getWeek(_id: string): Promise<IWeek> {
 
 export const resolvers = {
   RootQuery: {
-    week(obj: Object, args: IWeekArgs, { dataloaders }: { dataloaders: DataLoaders }) {
+    week(obj: Object, args: IWeekQueryArgs, { dataloaders }: { dataloaders: DataLoaders }) {
       return getWeek(args._id);
     },
     weeks(obj: Object, args: Object, { dataloaders }: { dataloaders: DataLoaders }) {

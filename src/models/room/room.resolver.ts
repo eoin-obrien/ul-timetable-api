@@ -1,9 +1,7 @@
 import { DataLoaders } from '../../dataloaders';
 import { IRoom } from '../../types/models/IRoom';
-
-interface IRoomArgs {
-  _id: string;
-}
+import { ILesson } from '../../types/models/ILesson';
+import { IRoomQueryArgs } from '../../types/query-args/IRoomQueryArgs';
 
 const buildings: { [key: string]: string } = {
   S: 'Schuman Building',
@@ -55,7 +53,7 @@ export function getRoom(_id: string): IRoom {
 
 export const resolvers = {
   RootQuery: {
-    room(obj: Object, args: IRoomArgs, { dataloaders }: { dataloaders: DataLoaders }) {
+    room(obj: Object, args: IRoomQueryArgs, { dataloaders }: { dataloaders: DataLoaders }) {
       return dataloaders.roomLoader.load(args._id);
     },
   },
