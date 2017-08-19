@@ -8,12 +8,18 @@ export function assertValidStudentId(id: string) {
 
 // language=GraphQL Schema
 export const timetableSchema: string = `
+  enum Type {
+    LEC
+    TUT
+    LAB
+  }
+  
   type Lesson {
     startTime: String!
     endTime: String!
     module: Module!
     group: String
-    type: String!
+    type: Type!
     rooms: [Room!]!
     weeks: [Week!]!
   }
