@@ -4,19 +4,29 @@ import { IDataLoaders } from '../../dataloaders';
 import { ILesson } from '../../types/models/ILesson';
 import { IWeekQueryArgs } from '../../types/query-args/IWeekQueryArgs';
 import { GraphQLError } from 'graphql';
+import { Week } from './week.model';
 
 function assertValidWeekId(id: string) {
-  if (!/^[1-9][0-4]?$/.test(id)) {
+  if (!/^([1-9]|1[0-4]?)$/.test(id)) {
     throw new GraphQLError(`Week ID "${id}" is invalid.`);
   }
 }
 
-export function getWeeks(): Promise<IWeek[]> {
-  return scrapeWeeks();
+export async function getWeeks(): Promise<IWeek[]> {
+  const cachedWeeks = await Week.find();
+  if (cachedWeeks.length && cachedWeeks.every(week => !week.isStale())) {
+    return cachedWeeks;
+  }
+  const scrapedWeeks = await scrapeWeeks();
+  return Promise.all(scrapedWeeks.map(week => Week.findByIdAndUpdate(week._id, week, { new: true, upsert:true })));
 }
 
-export function getWeek(_id: string): Promise<IWeek> {
+export async function getWeek(_id: string): Promise<IWeek> {
   assertValidWeekId(_id);
+  const cachedWeek = await Week.findById(_id);
+  if (cachedWeek && !cachedWeek.isStale()) {
+    return cachedWeek;
+  }
   return getWeeks()
     .then(weeks => weeks.find(week => week._id === _id));
 }

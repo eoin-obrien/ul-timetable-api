@@ -3,6 +3,7 @@ import { IDataLoaders } from '../../dataloaders';
 import { ITimetable } from '../../types/models/ITimetable';
 import { ITimetableQueryArgs } from '../../types/query-args/ITimetableQueryArgs';
 import { GraphQLError } from 'graphql';
+import { Timetable } from './timetable.model';
 
 function assertValidStudentId(id: string) {
   if (!/^[0-9]{7,8}$/.test(id)) {
@@ -10,9 +11,14 @@ function assertValidStudentId(id: string) {
   }
 }
 
-export function getTimetable(_id: string): Promise<ITimetable> {
+export async function getTimetable(_id: string): Promise<ITimetable> {
   assertValidStudentId(_id);
-  return scrapeTimetable(_id);
+  const cachedTimetable = await Timetable.findById(_id);
+  if (cachedTimetable && !cachedTimetable.isStale()) {
+    return cachedTimetable;
+  }
+  const scrapedTimetable = await scrapeTimetable(_id);
+  return Timetable.findByIdAndUpdate(_id, scrapedTimetable, { new: true, upsert:true });
 }
 
 export const resolvers = {
