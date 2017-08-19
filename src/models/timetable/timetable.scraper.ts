@@ -2,6 +2,7 @@ import * as rangeParser from 'parse-numeric-range';
 import scraper from '../../scraper';
 import { Timetable } from './timetable.model';
 import { ITimetable } from '../../types/models/ITimetable';
+import { ILesson } from '../../types/models/ILesson';
 
 const studentIdPattern = /^[0-9]{7,8}$/;
 const entrySplitPattern = /\s*<.*?>(?:.*?<\/.*?>)?\s*(?:&#xA0;)?/;

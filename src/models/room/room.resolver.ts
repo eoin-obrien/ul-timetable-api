@@ -1,4 +1,4 @@
-import { DataLoaders } from '../../schema/dataloaders';
+import { DataLoaders } from '../../dataloaders';
 import { IRoom } from '../../types/models/IRoom';
 
 interface IRoomArgs {

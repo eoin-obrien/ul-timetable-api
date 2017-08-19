@@ -1,6 +1,7 @@
 import { scrapeModule } from './module.scraper';
-import { DataLoaders } from '../../schema/dataloaders';
+import { DataLoaders } from '../../dataloaders';
 import { IModule } from '../../types/models/IModule';
+import { ILesson } from '../../types/models/ILesson';
 
 interface IModuleArgs {
   _id: string;

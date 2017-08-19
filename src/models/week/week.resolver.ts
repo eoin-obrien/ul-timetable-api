@@ -1,6 +1,7 @@
 import { scrapeWeeks } from './week.scraper';
 import { IWeek } from '../../types/models/IWeek';
-import { DataLoaders } from '../../schema/dataloaders';
+import { DataLoaders } from '../../dataloaders';
+import { ILesson } from '../../types/models/ILesson';
 
 interface IWeekArgs {
   _id: string;

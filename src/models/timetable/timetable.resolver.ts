@@ -1,5 +1,5 @@
 import { scrapeTimetable } from './timetable.scraper';
-import { DataLoaders } from '../../schema/dataloaders';
+import { DataLoaders } from '../../dataloaders';
 import { ITimetable } from '../../types/models/ITimetable';
 
 interface ITimetableArgs {

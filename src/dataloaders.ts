@@ -1,8 +1,8 @@
 import * as DataLoader from 'dataloader';
-import { getRoom } from '../models/room/room.resolver';
-import { getModule } from '../models/module/module.resolver';
-import { getTimetable } from '../models/timetable/timetable.resolver';
-import { getWeeks } from '../models/week/week.resolver';
+import { getRoom } from './models/room/room.resolver';
+import { getModule } from './models/module/module.resolver';
+import { getTimetable } from './models/timetable/timetable.resolver';
+import { getWeeks } from './models/week/week.resolver';
 import { ModuleType } from 'IModule.ts';
 import { RoomType } from 'IRoom.ts';
 import { TimetableType } from 'ITimetable.ts';
