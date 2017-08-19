@@ -1,9 +1,5 @@
-import { Document, Model, Schema, model } from 'mongoose';
-
-export type ModuleType = Document & {
-  _id: string,
-  name: string,
-};
+import { Model, Schema, model } from 'mongoose';
+import { IModule } from '../../types/models/IModule';
 
 const ModuleSchema = new Schema({
   _id: { type: String, required: true },
@@ -18,4 +14,4 @@ ModuleSchema.path('_id').validate((_id : string) => {
 });
 
 
-export const Module: Model<ModuleType> = model<ModuleType>('Module', ModuleSchema);
+export const Module: Model<IModule> = model<IModule>('Module', ModuleSchema);

@@ -1,17 +1,7 @@
-import { LessonType } from '../timetable/timetable.model';
-import {DataLoaders} from "../../schema/dataloaders";
-
-export interface RoomType {
-  _id: string;
-  building: string;
-  buildingCode: string;
-  floor: string;
-  number: string;
-}
-
-interface IRoomArgs {
-  _id: string;
-}
+import { IDataLoaders } from '../../dataloaders';
+import { IRoom } from '../../types/models/IRoom';
+import { ILesson } from '../../types/models/ILesson';
+import { IRoomQueryArgs } from '../../types/query-args/IRoomQueryArgs';
 
 const buildings: { [key: string]: string } = {
   S: 'Schuman Building',
@@ -46,9 +36,9 @@ function findBuildingCode(roomId: string) {
   }, '');
 }
 
-export function getRoom(_id: string): RoomType {
+export function getRoom(_id: string): IRoom {
   const buildingCode = findBuildingCode(_id);
-  const room: RoomType = {
+  const room: IRoom = {
     _id,
     buildingCode,
     building: buildings[buildingCode],
@@ -63,12 +53,12 @@ export function getRoom(_id: string): RoomType {
 
 export const resolvers = {
   RootQuery: {
-    room(obj: Object, args: IRoomArgs, { dataloaders }: { dataloaders: DataLoaders }) {
+    room(obj: Object, args: IRoomQueryArgs, { dataloaders }: { dataloaders: IDataLoaders }) {
       return dataloaders.roomLoader.load(args._id);
     },
   },
   Lesson: {
-    rooms(lesson: LessonType, args: Object, { dataloaders }: { dataloaders: DataLoaders }) {
+    rooms(lesson: ILesson, args: Object, { dataloaders }: { dataloaders: IDataLoaders }) {
       return dataloaders.roomLoader.loadMany(lesson.rooms);
     },
   },

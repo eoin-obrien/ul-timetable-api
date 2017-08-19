@@ -1,6 +1,8 @@
 import * as rangeParser from 'parse-numeric-range';
 import scraper from '../../scraper';
-import { LessonType, Timetable, TimetableType } from './timetable.model';
+import { Timetable } from './timetable.model';
+import { ITimetable } from '../../types/models/ITimetable';
+import { ILesson } from '../../types/models/ILesson';
 
 const studentIdPattern = /^[0-9]{7,8}$/;
 const entrySplitPattern = /\s*<.*?>(?:.*?<\/.*?>)?\s*(?:&#xA0;)?/;
@@ -11,7 +13,7 @@ export function validateStudentId(studentId: string): boolean {
   return studentIdPattern.test(studentId);
 }
 
-export function parseLesson(element: string): LessonType {
+export function parseLesson(element: string): ILesson {
   const parts = element.trim().split(entrySplitPattern);
   return {
     startTime: parts[0],
@@ -24,11 +26,11 @@ export function parseLesson(element: string): LessonType {
   };
 }
 
-export function parse(studentId: string, $: CheerioStatic): TimetableType {
-  const timetable: TimetableType = new Timetable({
+export function parse(studentId: string, $: CheerioStatic): ITimetable {
+  const timetable: ITimetable = new Timetable({
     _id: studentId,
   });
-  const lessons: LessonType[][] = [];
+  const lessons: ILesson[][] = [];
   $(daySelector).each((i, day) => {
     lessons[i] = [];
     $(entrySelector, day).each((j, lessonElement) => {
@@ -44,7 +46,7 @@ export function parse(studentId: string, $: CheerioStatic): TimetableType {
   return timetable;
 }
 
-export function scrapeTimetable(studentId: string): Promise<TimetableType> {
+export function scrapeTimetable(studentId: string): Promise<ITimetable> {
   const uri = 'http://www.timetable.ul.ie/tt2.asp';
   const form = {
     T1: studentId,

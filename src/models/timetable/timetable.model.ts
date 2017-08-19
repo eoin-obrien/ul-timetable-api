@@ -1,24 +1,5 @@
-import { Document, Model, Schema, model } from 'mongoose';
-
-export type LessonType = {
-  startTime: string;
-  endTime: string;
-  module: string;
-  group?: string;
-  type: string;
-  rooms: string[];
-  weeks: string[]
-};
-
-export type TimetableType = Document & {
-  _id: string;
-  monday: LessonType[];
-  tuesday: LessonType[];
-  wednesday: LessonType[];
-  thursday: LessonType[];
-  friday: LessonType[];
-  saturday: LessonType[];
-};
+import { Model, Schema, model } from 'mongoose';
+import { ITimetable } from '../../types/models/ITimetable';
 
 const LessonSchema = new Schema({
   startTime: { type: String, required: true },
@@ -43,4 +24,4 @@ const TimetableSchema = new Schema({
 TimetableSchema.set('timestamps', true);
 
 
-export const Timetable: Model<TimetableType> = model<TimetableType>('Timetable', TimetableSchema);
+export const Timetable: Model<ITimetable> = model<ITimetable>('Timetable', TimetableSchema);

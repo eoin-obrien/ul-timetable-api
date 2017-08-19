@@ -2,8 +2,8 @@ import * as express from 'express';
 import * as dotenv from 'dotenv';
 import * as mongoose from 'mongoose';
 import * as graphqlHTTP from 'express-graphql';
-import schema from './schema/schema';
-import {buildDataLoaders} from "./schema/dataloaders";
+import schema from './schema';
+import { buildDataLoaders } from './dataloaders';
 
 // Load environment variables from .env file, where API keys and passwords are configured
 dotenv.config({ path: '.env.example' });

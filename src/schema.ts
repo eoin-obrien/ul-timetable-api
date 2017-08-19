@@ -2,15 +2,15 @@ import * as _ from 'lodash';
 import * as GraphQLDate from 'graphql-date';
 import { makeExecutableSchema } from 'graphql-tools';
 
-import moduleSchema from '../models/module/module.schema';
-import roomSchema from '../models/room/room.schema';
-import timetableSchema from '../models/timetable/timetable.schema';
-import weekSchema from '../models/week/week.schema';
+import moduleSchema from './models/module/module.schema';
+import roomSchema from './models/room/room.schema';
+import timetableSchema from './models/timetable/timetable.schema';
+import weekSchema from './models/week/week.schema';
 
-import { resolvers as moduleResolvers } from '../models/module/module.resolver';
-import { resolvers as roomResolvers } from '../models/room/room.resolver';
-import { resolvers as timetableResolvers } from '../models/timetable/timetable.resolver';
-import { resolvers as weekResolvers } from '../models/week/week.resolver';
+import { resolvers as moduleResolvers } from './models/module/module.resolver';
+import { resolvers as roomResolvers } from './models/room/room.resolver';
+import { resolvers as timetableResolvers } from './models/timetable/timetable.resolver';
+import { resolvers as weekResolvers } from './models/week/week.resolver';
 
 // language=GraphQL Schema
 const rootQuery = `
