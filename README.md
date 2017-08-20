@@ -1,8 +1,5 @@
 # UL Timetable API
 
-[![Dependency Status](https://david-dm.org/videtur/ul-timetable-api.svg)](https://david-dm.org/videtur/ul-timetable-api)
-[![Build Status](https://travis-ci.org/videtur/ul-timetable-api.svg?branch=master)](https://travis-ci.org/videtur/ul-timetable-api) 
-
 GraphQL API for the University of Limerick's timetable.
 
 ## Features
@@ -36,14 +33,24 @@ npm start
 ```
 Navigate to `http://localhost:3000`
 
+## Environment variables
+
+Environment variables can be set at system level, or can be configured using a dotenv (`.env`) environment variables file.
+
+| Npm Script | Description |
+| ------------------------- | ---------------------------------------------------------------------------------------- |
+| `NODE_ENV`                | Can be set to `development` or `production`                                              |
+| `PORT`                    | Defaults to `3000` in development and `8080` in production                               |
+| `MONGODB_URI`             | URI of the MongoDB database to use                                                       |
+
 ## Scripts
 
 | Npm Script | Description |
-| ------------------------- | ------------------------------------------------------------------------------------------------- |
-| `start`                   | Runs full build before starting all watch tasks. Can be invoked with `npm start`                  |
-| `build`                   | Full build. Runs ALL build tasks (`build-ts`, `tslint`)                                           |
-| `serve`                   | Runs node on `dist/server.js` which is the apps entry point                                       |
-| `watch`                   | Runs all watch tasks (TypeScript, Node). Use this if you're not touching static assets.           |
-| `build-ts`                | Compiles all source `.ts` files to `.js` files in the `dist` folder                               |
-| `watch-ts`                | Same as `build-ts` but continuously watches `.ts` files and re-compiles when needed               |
-| `tslint`                  | Runs TSLint on project files                                                                      |
+| ------------------------- | ---------------------------------------------------------------------------------------- |
+| `start`                   | Runs full build before starting all watch tasks. Can be invoked with `npm start`         |
+| `build`                   | Full build. Runs ALL build tasks (`build-ts`, `tslint`)                                  |
+| `serve`                   | Runs node on `dist/server.js` which is the apps entry point                              |
+| `watch`                   | Runs all watch tasks (TypeScript, Node). Use this if you're not touching static assets.  |
+| `build-ts`                | Compiles all source `.ts` files to `.js` files in the `dist` folder                      |
+| `watch-ts`                | Same as `build-ts` but continuously watches `.ts` files and re-compiles when needed      |
+| `tslint`                  | Runs TSLint on project files                                                             |
