@@ -10,11 +10,17 @@ export function assertValidRoomId(id: string) {
 
 // language=GraphQL Schema
 export const roomSchema: string = `
+  # A type that describes a room.
   type Room {
+    # The room number.
     _id: ID!
+    # The name of the building in which the room is located.
     building: String!
+    # The code of the building in which the room is located.
     buildingCode: String!
+    # The floor on which the room is located.
     floor: String!
+    # The numeric part of the room number.
     number: String!
   }
 `;

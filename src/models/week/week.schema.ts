@@ -8,9 +8,13 @@ export function assertValidWeekId(id: string) {
 
 // language=GraphQL Schema
 export const weekSchema: string = `
+  # A type describing a week of the current semester.
   type Week {
+    # The week number displayed on the timetable.
     _id: ID!
+    # The teaching week name.
     name: String!
+    # The ISO8601 datetime on which the week commences.
     date: Date!
   }
 `;

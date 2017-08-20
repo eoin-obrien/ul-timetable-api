@@ -14,6 +14,7 @@ import { resolvers as weekResolvers } from './models/week/week.resolver';
 
 // language=GraphQL Schema
 const rootQuery = `
+  # A type describing the root query
   type RootQuery {
     timetable(_id: ID!, week: String): Timetable
     module(_id: ID!): Module
