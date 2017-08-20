@@ -2,13 +2,18 @@ import * as express from 'express';
 import * as dotenv from 'dotenv';
 import * as mongoose from 'mongoose';
 import * as graphqlHTTP from 'express-graphql';
+import * as morgan from 'morgan';
+import * as compression from 'compression';
 import schema from './schema';
 import { buildDataLoaders } from './dataloaders';
-import * as morgan from 'morgan';
 
 // Load environment variables from .env file, where API keys and passwords are configured
 dotenv.config({ path: '.env.example' });
 
+const port = process.env.PORT || 3000;
+const logFormat = process.env.NODE_ENV === 'production'
+  ? 'combined'
+  : 'dev';
 
 // Connect to MongoDB
 (<any>mongoose).Promise = global.Promise;
@@ -23,12 +28,12 @@ mongoose.connection.on('error', () => {
 const app = express();
 
 // Configure port
-app.set('port', process.env.PORT || 3000);
+app.set('port', port);
+
+// Compress responses
+app.use(compression());
 
 // Use Apache combined log format in production
-const logFormat = process.env.NODE_ENV === 'production'
-  ? 'combined'
-  : 'dev';
 app.use(morgan(logFormat));
 
 // GraphQL
