@@ -1,4 +1,4 @@
-import { scrape } from '../../scraper';
+import { scrape } from '../../webscraper';
 import { Week } from './week.model';
 import { IWeek } from '../../types/models/IWeek';
 

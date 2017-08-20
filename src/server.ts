@@ -2,13 +2,18 @@ import * as express from 'express';
 import * as dotenv from 'dotenv';
 import * as mongoose from 'mongoose';
 import * as graphqlHTTP from 'express-graphql';
+import * as morgan from 'morgan';
+import * as compression from 'compression';
 import schema from './schema';
 import { buildDataLoaders } from './dataloaders';
 
 // Load environment variables from .env file, where API keys and passwords are configured
 dotenv.config({ path: '.env.example' });
 
-
+const port = process.env.PORT || 3000;
+const logFormat = process.env.NODE_ENV === 'production'
+  ? 'combined'
+  : 'dev';
 
 // Connect to MongoDB
 (<any>mongoose).Promise = global.Promise;
@@ -22,12 +27,17 @@ mongoose.connection.on('error', () => {
 // Create Express server
 const app = express();
 
+// Configure port
+app.set('port', port);
 
-// Express configuration
-app.set('port', process.env.PORT || 3000);
+// Compress responses
+app.use(compression());
+
+// Use Apache combined log format in production
+app.use(morgan(logFormat));
 
 // GraphQL
-app.use('/graphql',  (req, res) => {
+app.use('/graphql', (req, res) => {
   const dataloaders = buildDataLoaders();
   graphqlHTTP({
     schema,
@@ -39,8 +49,7 @@ app.use('/graphql',  (req, res) => {
 
 // Start Express server
 app.listen(app.get('port'), () => {
-  console.log(`  App is running at http://localhost:${app.get('port')} in ${app.get('env')} mode`);
-  console.log('  Press CTRL-C to stop\n');
+  console.log(`Server running on port ${app.get('port')} in ${app.get('env')} mode`);
 });
 
 module.exports = app;
