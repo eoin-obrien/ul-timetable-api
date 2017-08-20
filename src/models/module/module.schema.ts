@@ -8,9 +8,11 @@ export function assertValidModuleId(id: string) {
 
 // language=GraphQL Schema
 export const moduleSchema: string = `
-  #
+  # A type that describes a module.
   type Module {
+    # The module's code.
     _id: ID!
+    # The module's name.
     name: String!
   }
 `;

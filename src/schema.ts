@@ -14,12 +14,36 @@ import { resolvers as weekResolvers } from './models/week/week.resolver';
 
 // language=GraphQL Schema
 const rootQuery = `
+  # A type describing the root query.
   type RootQuery {
-    timetable(_id: ID!, week: String): Timetable
-    module(_id: ID!): Module
-    room(_id: ID!): Room
-    week(_id: ID!): Week
-    weeks: [Week]
+    # Request a student's timetable.
+    timetable(
+      # The student's ID number.
+      _id: ID!,
+      # Week numer as displayed on the timetable (optional).
+      week: String
+    ): Timetable
+    
+    # Request module details.
+    module(
+      # The module code.
+      _id: ID!
+    ): Module
+    
+    # Request room details.
+    room(
+      # The room number.
+      _id: ID!
+    ): Room
+    
+    # Request week details.
+    week(
+      # Week number as displayed on the timetable.
+      _id: ID!
+    ): Week
+    
+    # Request all weeks.
+    weeks: [Week!]!
   }
 `;
 
