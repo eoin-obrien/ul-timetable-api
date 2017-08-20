@@ -37,7 +37,7 @@ app.use(compression());
 app.use(morgan(logFormat));
 
 // GraphQL
-app.use('/graphql',  (req, res) => {
+app.use('/graphql', (req, res) => {
   const dataloaders = buildDataLoaders();
   graphqlHTTP({
     schema,
@@ -49,8 +49,7 @@ app.use('/graphql',  (req, res) => {
 
 // Start Express server
 app.listen(app.get('port'), () => {
-  console.log(`  App is running at http://localhost:${app.get('port')} in ${app.get('env')} mode`);
-  console.log('  Press CTRL-C to stop\n');
+  console.log(`Server running on port ${app.get('port')} in ${app.get('env')} mode`);
 });
 
 module.exports = app;
