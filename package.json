@@ -1,12 +1,12 @@
 {
-  "name": "express-typescript-starter",
-  "version": "0.1.0",
-  "description": "A starting point for Node.js express apps with TypeScript",
+  "name": "ul-timetable-api",
+  "version": "0.0.0",
+  "description": "GraphQL API for the University of Limerick's timetable.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/hackathon-starter.git"
+    "url": "https://github.com/videtur/ul-timetable-api.git"
   },
-  "author": "Bowden Kelly",
+  "author": "Eoin O'Brien <eoinobrien910@gmail.com> (https://videtur.io/)",
   "license": "MIT",
   "scripts": {
     "start": "npm run build && npm run watch",
