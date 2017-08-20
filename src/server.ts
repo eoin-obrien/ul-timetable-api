@@ -10,14 +10,17 @@ import { buildDataLoaders } from './dataloaders';
 // Load environment variables from .env file, where API keys and passwords are configured
 dotenv.config({ path: '.env.example' });
 
-const port = process.env.PORT || 3000;
+const port = process.env.NODE_ENV === 'production'
+  ? process.env.PORT || 8080
+  : process.env.PORT || 3000;
+
 const logFormat = process.env.NODE_ENV === 'production'
   ? 'combined'
   : 'dev';
 
 // Connect to MongoDB
 (<any>mongoose).Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on('error', () => {
   console.log('MongoDB connection error. Please make sure MongoDB is running.');

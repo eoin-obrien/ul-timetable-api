@@ -1,6 +1,6 @@
 {
   "name": "ul-timetable-api",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "GraphQL API for the University of Limerick's timetable.",
   "repository": {
     "type": "git",
