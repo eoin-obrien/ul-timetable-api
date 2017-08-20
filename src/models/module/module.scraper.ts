@@ -1,5 +1,5 @@
 import titleCapitalization = require('title-capitalization');
-import { scrape } from '../../scraper';
+import { scrape } from '../../webscraper';
 import { Module } from './module.model';
 import { IModule } from '../../types/models/IModule';
 

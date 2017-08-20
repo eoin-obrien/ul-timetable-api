@@ -1,5 +1,5 @@
 import * as rangeParser from 'parse-numeric-range';
-import { scrape } from '../../scraper';
+import { scrape } from '../../webscraper';
 import { Timetable } from './timetable.model';
 import { ITimetable } from '../../types/models/ITimetable';
 import { ILesson } from '../../types/models/ILesson';
