@@ -44,7 +44,6 @@ Navigate to `http://localhost:3000`
 | `build`                   | Full build. Runs ALL build tasks (`build-ts`, `tslint`)                                           |
 | `serve`                   | Runs node on `dist/server.js` which is the apps entry point                                       |
 | `watch`                   | Runs all watch tasks (TypeScript, Node). Use this if you're not touching static assets.           |
-| `test`                    | Runs tests using Jest test runner                                                                 |
 | `build-ts`                | Compiles all source `.ts` files to `.js` files in the `dist` folder                               |
 | `watch-ts`                | Same as `build-ts` but continuously watches `.ts` files and re-compiles when needed               |
 | `tslint`                  | Runs TSLint on project files                                                                      |
