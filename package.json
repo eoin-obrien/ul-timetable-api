@@ -1,13 +1,13 @@
 {
   "name": "ul-timetable-api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "GraphQL API for the University of Limerick's timetable.",
   "repository": {
     "type": "git",
     "url": "https://github.com/videtur/ul-timetable-api.git"
   },
   "author": "Eoin O'Brien <eoinobrien910@gmail.com> (https://videtur.io/)",
-  "license": "MIT",
+  "license": "GPL-3.0+",
   "scripts": {
     "start": "npm run build && npm run watch",
     "build": "npm run build-ts && npm run tslint",
