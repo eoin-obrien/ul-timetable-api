@@ -4,7 +4,6 @@ import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import * as dotenv from 'dotenv';
 import * as mongoose from 'mongoose';
 import * as morgan from 'morgan';
-import * as compression from 'compression';
 import schema from './schema';
 import { buildDataLoaders } from './dataloaders';
 
@@ -33,9 +32,6 @@ const app = express();
 
 // Configure port
 app.set('port', port);
-
-// Compress responses
-app.use(compression());
 
 // Use Apache combined log format in production
 app.use(morgan(logFormat));
