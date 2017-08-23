@@ -1,9 +1,9 @@
 import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import * as dotenv from 'dotenv';
 import * as mongoose from 'mongoose';
-import * as graphqlHTTP from 'express-graphql';
 import * as morgan from 'morgan';
-import * as compression from 'compression';
 import schema from './schema';
 import { buildDataLoaders } from './dataloaders';
 
@@ -33,22 +33,19 @@ const app = express();
 // Configure port
 app.set('port', port);
 
-// Compress responses
-app.use(compression());
-
 // Use Apache combined log format in production
 app.use(morgan(logFormat));
 
 // GraphQL
-app.use('/graphql', (req, res) => {
-  const dataloaders = buildDataLoaders();
-  graphqlHTTP({
-    schema,
-    context:{ dataloaders },
-    graphiql: true,
-    pretty: true,
-  })(req, res);
-});
+app.use('/graphql', bodyParser.json(), graphqlExpress(() => ({
+  schema,
+  context: { dataloaders: buildDataLoaders() },
+})));
+
+// GraphiQL
+app.use('/', graphiqlExpress({
+  endpointURL: '/graphql',
+}));
 
 // Start Express server
 app.listen(app.get('port'), () => {
