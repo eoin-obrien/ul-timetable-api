@@ -1,13 +1,16 @@
 # UL Timetable API
 
-GraphQL API for the University of Limerick's timetable.
+[GraphQL](http://graphql.org/learn/) API for the University of Limerick's [timetable](http://www.timetable.ul.ie).
 
 ## Features
-- Webscraper for [www.timetable.ul.ie](http://www.timetable.ul.ie)
 - Written in TypeScript
 - Uses DataLoader for per-request caching
 - Caches scraped data in MongoDB
-- GraphiQL IDE for development and debugging
+- Graph*i*QL IDE for development and debugging
+
+## API endpoints
+- `/` - Graph*i*QL IDE
+- `/graphql` - GraphQL API endpoint
 
 ## Pre-requisites
 - [Node.js](https://nodejs.org/en/)
