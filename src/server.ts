@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
+import * as cors from 'cors';
 import * as dotenv from 'dotenv';
 import * as mongoose from 'mongoose';
 import * as morgan from 'morgan';
@@ -27,8 +28,8 @@ mongoose.connection.on('error', () => {
   process.exit();
 });
 
-// Create Express server
-const app = express();
+// Create Express server with CORS support
+const app = express().use('*', cors());
 
 // Configure port
 app.set('port', port);
