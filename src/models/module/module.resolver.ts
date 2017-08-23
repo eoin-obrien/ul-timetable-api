@@ -13,7 +13,7 @@ export async function getModule(_id: string): Promise<IModule> {
     return cachedModule;
   }
   const scrapedModule = await scrapeModule(_id);
-  return scrapedModule && Module.findByIdAndUpdate(_id, scrapedModule, { new: true, upsert:true });
+  return Module.findByIdAndUpdate(_id, scrapedModule, { new: true, upsert:true });
 }
 
 export const resolvers = {

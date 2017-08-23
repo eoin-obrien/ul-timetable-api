@@ -6,6 +6,7 @@ const bestBefore = 86400000;
 const ModuleSchema = new Schema({
   _id: { type: String, required: true },
   name: { type: String, required: true },
+  exists: { type: Boolean, required: true },
 });
 
 ModuleSchema.set('timestamps', true);

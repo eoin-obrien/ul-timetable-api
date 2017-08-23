@@ -8,15 +8,12 @@ const codeSelector
 const titleSelector
   = 'body > b > table > tbody > tr > td > div > center > table > tbody > tr:nth-child(2) > td:nth-child(2)';
 
-export function parse($: CheerioStatic): IModule {
+export function parse(moduleCode: string, $: CheerioStatic): IModule {
   const _id = $(codeSelector).text().trim();
   const name = titleCapitalization($(titleSelector).text().trim().toLowerCase());
-  if (!_id || !name) {
-    return null;
-  }
   return new Module({
-    _id,
-    name,
+    _id: moduleCode,
+    name: name || '',
   });
 }
 
@@ -25,5 +22,5 @@ export function scrapeModule(moduleCode: string): Promise<IModule> {
   const form = {
     T1: moduleCode,
   };
-  return scrape('post', uri, form).then(parse);
+  return scrape('post', uri, form).then($ => parse(moduleCode, $));
 }
