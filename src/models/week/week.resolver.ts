@@ -7,7 +7,8 @@ import { Week } from './week.model';
 import { assertValidWeekId } from './week.schema';
 
 export async function getWeeks(): Promise<IWeek[]> {
-  const cachedWeeks = await Week.find();
+  const cachedWeeks = await Week.find().sort('date');
+  console.log(cachedWeeks);
   if (cachedWeeks.length && cachedWeeks.every(week => !week.isStale())) {
     return cachedWeeks;
   }
