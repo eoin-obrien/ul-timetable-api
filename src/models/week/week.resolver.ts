@@ -6,6 +6,8 @@ import { IWeekQueryArgs } from '../../types/query-args/IWeekQueryArgs';
 import { Week } from './week.model';
 import { assertValidWeekId } from './week.schema';
 
+const PADDABLE_WEEK_REGEX = /^[0-9]/;
+
 export async function getWeeks(): Promise<IWeek[]> {
   const cachedWeeks = await Week.find().sort('date');
   console.log(cachedWeeks);
@@ -13,6 +15,11 @@ export async function getWeeks(): Promise<IWeek[]> {
     return cachedWeeks;
   }
   const scrapedWeeks = await scrapeWeeks();
+  scrapedWeeks.forEach((week) => {
+    if (PADDABLE_WEEK_REGEX.test(week.name)) {
+      week.name = `Week ${week.name}`;
+    }
+  });
   return Promise.all(scrapedWeeks.map(week => Week.findByIdAndUpdate(week._id, week, { new: true, upsert:true })));
 }
 
