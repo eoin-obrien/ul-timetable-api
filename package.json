@@ -1,6 +1,6 @@
 {
   "name": "ul-timetable-api",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "GraphQL API for the University of Limerick's timetable.",
   "repository": {
     "type": "git",
@@ -11,13 +11,13 @@
   "scripts": {
     "start": "npm run build && npm run watch",
     "build": "npm run build-ts && npm run tslint",
-    "serve": "nodemon dist/server.js",
+    "serve": "nodemon --watch dist dist/server.js",
     "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve\"",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "debug": "npm run build && npm run watch-debug",
-    "serve-debug": "nodemon --inspect dist/server.js",
+    "serve-debug": "nodemon --watch dist --inspect dist/server.js",
     "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\""
   },
   "dependencies": {
