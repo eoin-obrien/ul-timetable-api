@@ -2,7 +2,8 @@ import titleCapitalization = require('title-capitalization');
 import { Module, StudentTimetable, StudentTimetableLesson, Week, Room } from '../types';
 import { buildingCodes, crawl } from './util';
 import * as rangeParser from 'parse-numeric-range';
-import { roomCodePattern } from '../models/room/room.schema';
+
+const roomCodePattern = /^(S|KB|CS|GL|F|ER|LC|L|SR|P|HS|A|B|C|D|E|AD|IW|GEMS)([BGMO0123])([0-9]+[A-Z]?)$/;
 
 const studentTimetableEntrySplitPattern = /\s*<.*?>(?:.*?<\/.*?>)?\s*(?:&#xA0;)?/;
 const studentTimetableDaySelector = 'body > div > table > tbody > tr:nth-child(2) > td';
