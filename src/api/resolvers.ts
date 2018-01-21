@@ -4,6 +4,7 @@ import {
   StudentTimetableQueryArgs, WeekQueryArgs,
 } from '../types';
 import { isValidModuleId, isValidRoomId, isValidStudentTimetableId, isValidWeekId } from './util';
+import * as GraphQLDate from 'graphql-date';
 
 const resolveFunctions = {
   RootQuery: {
@@ -46,6 +47,7 @@ const resolveFunctions = {
       return context.dataloaders.weeks.loadMany(lesson.weeks);
     },
   },
+  Date: GraphQLDate,
 };
 
 export default resolveFunctions;
