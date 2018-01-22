@@ -1,5 +1,7 @@
 import * as rpn from 'request-promise-native';
 import * as cheerio from 'cheerio';
+import { Context } from '../types';
+import { getDataLoaders } from './dataloaders';
 
 export const buildingCodes: { [key: string]: string } = {
   S: 'Schuman Building',
@@ -22,6 +24,12 @@ export const buildingCodes: { [key: string]: string } = {
   IW: 'Irish World Academy Building',
   GEMS: 'Medical School',
 };
+
+export function getContext(): Context {
+  return {
+    dataloaders: getDataLoaders(),
+  };
+}
 
 export async function crawl<T>(method: string, uri: string, form?: any): Promise<CheerioStatic> {
   const options: rpn.Options = {

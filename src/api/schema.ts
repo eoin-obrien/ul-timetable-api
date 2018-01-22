@@ -1,5 +1,5 @@
 // language=GraphQL
-const typeDefinitions = `
+export const typeDefs = [`
   scalar Date
   
   enum Type {
@@ -91,6 +91,4 @@ const typeDefinitions = `
   schema {
     query: RootQuery
   }
-`;
-
-export default [typeDefinitions];
+`];

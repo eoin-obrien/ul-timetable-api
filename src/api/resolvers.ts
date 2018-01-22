@@ -6,7 +6,7 @@ import {
 import { isValidModuleId, isValidRoomId, isValidStudentTimetableId, isValidWeekId } from './util';
 import * as GraphQLDate from 'graphql-date';
 
-const resolveFunctions = {
+export const resolvers = {
   RootQuery: {
     studentTimetable(root: RootValue, args: StudentTimetableQueryArgs, context: Context) {
       if (!isValidStudentTimetableId(args.id)) {
@@ -49,5 +49,3 @@ const resolveFunctions = {
   },
   Date: GraphQLDate,
 };
-
-export default resolveFunctions;
