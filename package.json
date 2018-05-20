@@ -34,7 +34,9 @@
     "test-only": "jest --coverage",
     "test:watch": "jest --watch"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ul-timetable": "^0.1.1"
+  },
   "devDependencies": {
     "@types/node": "^9.3.0",
     "jest": "^22.4.4",
