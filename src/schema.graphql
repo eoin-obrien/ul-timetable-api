@@ -1,0 +1,116 @@
+schema {
+    query: Query
+}
+
+type Query {
+    courseTimetable(id: ID!, year: Int!): CourseTimetable
+    moduleTimetable(id: ID!): ModuleTimetable
+    roomTimetable(id: ID!): RoomTimetable
+    studentTimetable(id: ID!): StudentTimetable
+    moduleExamTimetable(id: ID!): ModuleExamTimetable
+    studentExamTimetable(id: ID!): StudentExamTimetable
+    module(id: ID!): Module
+    room(id: ID!): Room
+    week(id: ID!): Week
+}
+
+type CourseTimetable {
+  course: ID
+  year: Int
+  lessons: [CourseTimetableLesson]
+}
+
+type ModuleTimetable {
+  module: Module
+  lessons: [ModuleTimetableLesson]
+}
+
+type RoomTimetable {
+  room: Room
+  lessons: [RoomTimetableLesson]
+}
+
+type StudentTimetable {
+  student: ID
+  lessons: [StudentTimetableLesson]
+}
+
+type ModuleExamTimetable {
+  module: Module
+  room: Room
+  date: String
+  info: String
+}
+
+type StudentExamTimetable {
+  student: ID
+  modules: [ModuleExamTimetable]
+}
+
+type Module {
+  id: ID
+  name: String
+}
+
+type Room {
+  id: ID
+  buildingName: String
+  building: String
+  floor: String
+  room: String
+}
+
+type Week {
+  id: ID
+  name: String
+  date: String
+}
+
+interface Lesson {
+  fromTime: String
+  toTime: String
+  lessonType: LessonType
+  weeks: [Week]
+}
+
+type StudentTimetableLesson implements Lesson {
+  module: Module;
+  rooms: [Room];
+  group: String;
+}
+
+type CourseTimetableLesson implements Lesson {
+  module: Module;
+  rooms: [Room];
+  group: String;
+  instructor: String;
+}
+
+type ModuleTimetableLesson implements Lesson {
+  rooms: [Room];
+  group: String;
+  instructor: String;
+}
+
+type RoomTimetableLesson implements Lesson {
+  modules: [Module];
+  groups: [String];
+  size: Int;
+  instructor: String;
+}
+
+enum Day {
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+}
+
+enum LessonType {
+  LAB
+  LEC
+  TUT
+  RMBKG
+}
