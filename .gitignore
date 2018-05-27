@@ -106,3 +106,8 @@ fabric.properties
 # Compiled code
 dist/
 
+# Serverless directories
+.serverless
+
+# Webpack directories
+.webpack

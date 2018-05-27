@@ -74,29 +74,45 @@ interface Lesson {
 }
 
 type StudentTimetableLesson implements Lesson {
-  module: Module;
-  rooms: [Room];
-  group: String;
+  fromTime: String
+  toTime: String
+  lessonType: LessonType
+  weeks: [Week]
+  module: Module
+  rooms: [Room]
+  group: String
 }
 
 type CourseTimetableLesson implements Lesson {
-  module: Module;
-  rooms: [Room];
-  group: String;
-  instructor: String;
+  fromTime: String
+  toTime: String
+  lessonType: LessonType
+  weeks: [Week]
+  module: Module
+  rooms: [Room]
+  group: String
+  instructor: String
 }
 
 type ModuleTimetableLesson implements Lesson {
-  rooms: [Room];
-  group: String;
-  instructor: String;
+  fromTime: String
+  toTime: String
+  lessonType: LessonType
+  weeks: [Week]
+  rooms: [Room]
+  group: String
+  instructor: String
 }
 
 type RoomTimetableLesson implements Lesson {
-  modules: [Module];
-  groups: [String];
-  size: Int;
-  instructor: String;
+  fromTime: String
+  toTime: String
+  lessonType: LessonType
+  weeks: [Week]
+  modules: [Module]
+  groups: [String]
+  size: Int
+  instructor: String
 }
 
 enum Day {
