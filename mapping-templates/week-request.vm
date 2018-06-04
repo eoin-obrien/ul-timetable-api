@@ -1,0 +1,10 @@
+{
+    "version" : "2017-02-28",
+    "operation": "BatchInvoke",
+    "payload": {
+      "field": "week",
+    	"args": {
+        "id": "$context.arguments.id"
+      }
+    }
+}

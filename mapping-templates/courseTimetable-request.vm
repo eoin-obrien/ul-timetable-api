@@ -1,0 +1,11 @@
+{
+    "version" : "2017-02-28",
+    "operation": "BatchInvoke",
+    "payload": {
+      "field": "courseTimetable",
+    	"args": {
+        "id": "$context.arguments.id",
+        "year": "$context.arguments.year"
+      }
+    }
+}

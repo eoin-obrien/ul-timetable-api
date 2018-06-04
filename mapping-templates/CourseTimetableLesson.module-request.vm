@@ -1,0 +1,10 @@
+{
+    "version" : "2017-02-28",
+    "operation": "BatchInvoke",
+    "payload": {
+      "field": "CourseTimetableLesson.module",
+    	"args": {
+        "id": "$context.source.module",
+      }
+    }
+}
