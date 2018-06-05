@@ -30,3 +30,6 @@ build/
 
 # Serverless config files
 config.*.yml
+
+# Serverless builds
+.serverless/
