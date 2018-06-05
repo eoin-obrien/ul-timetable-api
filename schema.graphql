@@ -73,16 +73,6 @@ interface Lesson {
   weeks: [Week]
 }
 
-type StudentTimetableLesson implements Lesson {
-  fromTime: String
-  toTime: String
-  lessonType: LessonType
-  weeks: [Week]
-  module: Module
-  rooms: [Room]
-  group: String
-}
-
 type CourseTimetableLesson implements Lesson {
   fromTime: String
   toTime: String
@@ -113,6 +103,16 @@ type RoomTimetableLesson implements Lesson {
   groups: [String]
   size: Int
   instructor: String
+}
+
+type StudentTimetableLesson implements Lesson {
+  fromTime: String
+  toTime: String
+  lessonType: LessonType
+  weeks: [Week]
+  module: Module
+  rooms: [Room]
+  group: String
 }
 
 enum Day {
