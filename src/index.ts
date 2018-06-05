@@ -1,6 +1,6 @@
+import { weekDates } from 'ul-timetable';
 import {
   courseTimetableDataLoader,
-  loadFromDataLoader,
   moduleDataLoader,
   moduleExamTimetableDataLoader,
   moduleTimetableDataLoader,
@@ -22,6 +22,10 @@ import {
   IStudentTimetableBatchEvent,
   IWeekBatchEvent,
 } from './types';
+import {
+  loadFromDataLoader,
+  loadFromResolver,
+} from './util';
 
 export const graphqlHandler: AWSLambda.Handler = (event: IAppSyncEvent[], _: AWSLambda.Context, cb: AWSLambda.Callback) => {
   const field = event[0].field;
@@ -73,6 +77,10 @@ export const graphqlHandler: AWSLambda.Handler = (event: IAppSyncEvent[], _: AWS
     case 'RoomTimetableLesson.weeks':
     case 'StudentTimetableLesson.weeks':
       loadFromDataLoader(weekDataLoader(), event as IWeekBatchEvent[], cb);
+      break;
+
+    case 'weeks':
+      loadFromResolver(weekDates, cb);
       break;
 
     default:

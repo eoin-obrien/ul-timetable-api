@@ -12,6 +12,7 @@ type Query {
     module(id: ID!): Module
     room(id: ID!): Room
     week(id: ID!): Week
+    weeks: [Week]
 }
 
 type CourseTimetable {

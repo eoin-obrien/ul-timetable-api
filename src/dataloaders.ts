@@ -33,12 +33,6 @@ import {
   IWeekBatchEvent,
 } from './types';
 
-export function loadFromDataLoader<K, V>(dataloader: DataLoader<K, V>, keys: K[], callback: AWSLambda.Callback): void {
-  dataloader.loadMany(keys)
-    .then(callback.bind(null, null))
-    .catch(callback);
-}
-
 export function courseTimetableDataLoader(): DataLoader<ICourseTimetableBatchEvent, ICourseTimetable> {
   return new DataLoader(batchCourseTimetables);
 }
