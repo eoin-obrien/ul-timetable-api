@@ -1,18 +1,202 @@
 service:
-  name: aws-nodejs-typescript
+  name: ul-timetable-api
 
 plugins:
-  - serverless-webpack
   - serverless-appsync-plugin
+  - serverless-offline
+  - serverless-webpack
 
 provider:
   name: aws
   runtime: nodejs8.10
+  stage: ${opt:stage, "dev"}
+  region: eu-west-1
+
+custom:
+  accountId: ${file(./config.${self:provider.stage}.yml):accountId}
+  appSync:
+    name:  ${self:service.name}
+    authenticationType: API_KEY
+    mappingTemplates:
+      - dataSource: Lambda
+        type: Query
+        field: courseTimetable
+        request: "courseTimetable-request.vm"
+        response: "courseTimetable-response.vm"
+
+      - dataSource: Lambda
+        type: Query
+        field: moduleTimetable
+        request: "moduleTimetable-request.vm"
+        response: "moduleTimetable-response.vm"
+
+      - dataSource: Lambda
+        type: Query
+        field: roomTimetable
+        request: "roomTimetable-request.vm"
+        response: "roomTimetable-response.vm"
+
+      - dataSource: Lambda
+        type: Query
+        field: studentTimetable
+        request: "studentTimetable-request.vm"
+        response: "studentTimetable-response.vm"
+
+      - dataSource: Lambda
+        type: Query
+        field: moduleExamTimetable
+        request: "moduleExamTimetable-request.vm"
+        response: "moduleExamTimetable-response.vm"
+
+      - dataSource: Lambda
+        type: Query
+        field: studentExamTimetable
+        request: "studentExamTimetable-request.vm"
+        response: "studentExamTimetable-response.vm"
+
+      - dataSource: Lambda
+        type: Query
+        field: module
+        request: "module-request.vm"
+        response: "module-response.vm"
+
+      - dataSource: Lambda
+        type: Query
+        field: room
+        request: "room-request.vm"
+        response: "room-response.vm"
+
+      - dataSource: Lambda
+        type: Query
+        field: week
+        request: "week-request.vm"
+        response: "week-response.vm"
+
+      # CourseTimetableLesson
+
+      - dataSource: Lambda
+        type: CourseTimetableLesson
+        field: module
+        request: "CourseTimetableLesson.module-request.vm"
+        response: "CourseTimetableLesson.module-response.vm"
+
+      - dataSource: Lambda
+        type: CourseTimetableLesson
+        field: rooms
+        request: "CourseTimetableLesson.rooms-request.vm"
+        response: "CourseTimetableLesson.rooms-response.vm"
+
+      - dataSource: Lambda
+        type: CourseTimetableLesson
+        field: weeks
+        request: "CourseTimetableLesson.weeks-request.vm"
+        response: "CourseTimetableLesson.weeks-response.vm"
+
+      # ModuleTimetableLesson
+
+      - dataSource: Lambda
+        type: ModuleTimetableLesson
+        field: rooms
+        request: "ModuleTimetableLesson.rooms-request.vm"
+        response: "ModuleTimetableLesson.rooms-response.vm"
+
+      - dataSource: Lambda
+        type: ModuleTimetableLesson
+        field: weeks
+        request: "ModuleTimetableLesson.weeks-request.vm"
+        response: "ModuleTimetableLesson.weeks-response.vm"
+
+      # RoomTimetableLesson
+
+      - dataSource: Lambda
+        type: RoomTimetableLesson
+        field: modules
+        request: "RoomTimetableLesson.modules-request.vm"
+        response: "RoomTimetableLesson.modules-response.vm"
+
+      - dataSource: Lambda
+        type: RoomTimetableLesson
+        field: weeks
+        request: "RoomTimetableLesson.weeks-request.vm"
+        response: "RoomTimetableLesson.weeks-response.vm"
+
+      # StudentTimetableLesson
+
+      - dataSource: Lambda
+        type: StudentTimetableLesson
+        field: module
+        request: "StudentTimetableLesson.module-request.vm"
+        response: "StudentTimetableLesson.module-response.vm"
+
+      - dataSource: Lambda
+        type: StudentTimetableLesson
+        field: rooms
+        request: "StudentTimetableLesson.rooms-request.vm"
+        response: "StudentTimetableLesson.rooms-response.vm"
+
+      - dataSource: Lambda
+        type: StudentTimetableLesson
+        field: weeks
+        request: "StudentTimetableLesson.weeks-request.vm"
+        response: "StudentTimetableLesson.weeks-response.vm"
+
+      # ModuleExamTimetable
+
+      - dataSource: Lambda
+        type: ModuleExamTimetable
+        field: module
+        request: "ModuleExamTimetable.module-request.vm"
+        response: "ModuleExamTimetable.module-response.vm"
+
+      - dataSource: Lambda
+        type: ModuleExamTimetable
+        field: room
+        request: "ModuleExamTimetable.room-request.vm"
+        response: "ModuleExamTimetable.room-response.vm"
+
+    # schema: # defaults schema.graphql
+    serviceRole: "AppSyncServiceRole"
+    dataSources:
+      - type: AWS_LAMBDA
+        name: Lambda
+        description: "Lambda DataSource"
+        config:
+          lambdaFunctionArn: { Fn::GetAtt: [GraphqlLambdaFunction, Arn] }
+          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
+  serverless-offline:
+    port: 4000
+  webpackIncludeModules: true
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          method: get
-          path: hello
+  graphql:
+    handler: "src/index.graphqlHandler"
+
+resources:
+  Resources:
+    AppSyncLambdaServiceRole:
+      Type: "AWS::IAM::Role"
+      Properties:
+        RoleName: "${self:service.name}-Lambda-${self:custom.appSync.serviceRole}"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                Service:
+                  - "appsync.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "${self:service.name}-Lambda-${self:custom.appSync.serviceRole}-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                -
+                  Effect: "Allow"
+                  Action:
+                    - "lambda:invokeFunction"
+                  Resource:
+                    - "arn:aws:lambda:eu-west-1:*:function:${self:service.name}-${self:provider.stage}-graphql"
+                    - "arn:aws:lambda:eu-west-1:*:function:${self:service.name}-${self:provider.stage}-graphql:*"
